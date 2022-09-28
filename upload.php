@@ -8,6 +8,7 @@ if (isset($_POST["submit"])) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 if ($i != 0) {
                     if ($_FILES["file"]["name"] == 'siteconfig.csv') {
+                        if ($data[0] == 'price_select_atntn') $data[1] = htmlspecialchars($data[1]);
                         $string .= ("UPDATE siteconfig SET CONFIGVALUE =" . "'" . $data[1] . "'". ' WHERE CONFIGKEY = ' . "'" . $data[0] . "'". ';') .  '<br />';
                     } else if ($_FILES["file"]["name"] == 'sitemenu.csv') {
                         $end = (count($data) - 1 == $data[0]) ? ';' : ',';
